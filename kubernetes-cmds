@@ -1,3 +1,4 @@
+--
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 kubeadm token create --print-join-command
 kubeadm reset -f
@@ -11,3 +12,5 @@ watch -x kubectl get all
 crictl ps
 crictl images ls
 
+--
+helm create c2
