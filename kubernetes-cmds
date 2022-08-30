@@ -1,0 +1,13 @@
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+kubeadm token create --print-join-command
+kubeadm reset -f
+kubectl get pods --all-namespaces
+kubectl get events --namespace=kube-system
+kubectl logs podname --namespace=kube-system
+kubectl config set-context $(kubectl config current-context) --namespace=<namespace>
+kubectl config view | grep namespace
+kubectl get pods --namespace=
+watch -x kubectl get all
+crictl ps
+crictl images ls
+
