@@ -22,3 +22,4 @@ helm delete n1
 helm install n1 . --set replicaCount=2
 helm inspect values . > tmp/values.yaml
 helm install n1 . --values tmp/values.yaml
+helm upgrade n1 . --set replicaCount=2
