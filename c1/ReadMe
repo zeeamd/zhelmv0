@@ -1,0 +1,24 @@
+--
+# kubectl version --short
+Flag --short has been deprecated, and will be removed in the future. The --short output will become the default.
+Client Version: v1.25.0
+Kustomize Version: v4.5.7
+Server Version: v1.25.0
+
+--
+# helm version --short
+v3.4.1+gc4e7485
+
+--Commands
+kubectl create deployment c1 --image nginx --dry-run -o yaml > templates/deployment.yaml
+kubectl expose deployment c1 --port 80 --dry-run -o yaml > service.yaml
+
+--
+helm install n1 .
+helm list
+helm upgrade n1 .
+helm rollback n1 1
+helm delete n1
+helm install n1 . --set replicaCount=2
+helm inspect values . > tmp/values.yaml
+helm install n1 . --values tmp/values.yaml
