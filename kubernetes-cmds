@@ -11,6 +11,12 @@ kubectl get pods --namespace=
 watch -x kubectl get all
 crictl ps
 crictl images ls
+kubectl cluster-info
+kubectl -n kube-system create serviceaccount tiller
+kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+kubectl get clusterrolebinding tiller
+kubectl -n kube-system get deploy,replicaset,clusterrolebinding,serviceaccount | grep tiller
 
 --
 helm create c2
+helm search hub jenkins

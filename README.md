@@ -1,5 +1,7 @@
 # zhelmv0
 
+--Action Required: Tiller & Helm 2 is set for deprecation on November 13th, 2020
+
 --setup kubernetes cluster on Ubuntu 20.04.5 LTS
 https://www.letscloud.io/community/how-to-install-kubernetesk8s-and-docker-on-ubuntu-2004
 
