@@ -20,3 +20,4 @@ kubectl -n kube-system get deploy,replicaset,clusterrolebinding,serviceaccount |
 --
 helm create c2
 helm search hub jenkins
+helm template .
