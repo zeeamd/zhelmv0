@@ -1,5 +1,5 @@
 {{ define "nimage" }}
-- image: nginx
-  name: nginx
-  resources: {}
+      - image: nginx
+        name: nginx
+        resources: {}
 {{ end }}
