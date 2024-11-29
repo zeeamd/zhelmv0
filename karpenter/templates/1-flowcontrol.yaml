@@ -1,0 +1,74 @@
+---
+apiVersion: flowcontrol.apiserver.k8s.io/v1
+kind: FlowSchema
+metadata:
+  name: karpenter-leader-election
+  namespace: {{ .Values.namespace }}
+  labels:
+   helm.sh/chart: karpenter-{{ .Values.karpenterVersion }}
+   app.kubernetes.io/name: karpenter
+   app.kubernetes.io/instance: karpenter
+   app.kubernetes.io/version: {{ .Values.karpenterVersion }}
+   app.kubernetes.io/managed-by: Helm
+spec:
+  distinguisherMethod:
+    type: ByUser
+  matchingPrecedence: 200
+  priorityLevelConfiguration:
+    name: leader-election
+  rules:
+  - resourceRules:
+    - apiGroups:
+        - coordination.k8s.io
+      namespaces:
+        - '*'
+      resources:
+        - leases
+      verbs:
+        - get
+        - create
+        - update
+    subjects:
+      - kind: ServiceAccount
+        serviceAccount:
+          name: karpenter
+          namespace: {{ .Values.namespace }}
+---
+apiVersion: flowcontrol.apiserver.k8s.io/v1
+kind: FlowSchema
+metadata:
+  name: karpenter-workload
+  namespace: {{ .Values.namespace }}
+  labels:
+   helm.sh/chart: karpenter-{{ .Values.karpenterVersion }}
+   app.kubernetes.io/name: karpenter
+   app.kubernetes.io/instance: karpenter
+   app.kubernetes.io/version: {{ .Values.karpenterVersion }}
+   app.kubernetes.io/managed-by: Helm
+spec:
+  distinguisherMethod:
+    type: ByUser
+  matchingPrecedence: 1000
+  priorityLevelConfiguration:
+    name: workload-high
+  rules:
+    - nonResourceRules:
+        - nonResourceURLs:
+            - '*'
+          verbs:
+            - '*'
+      resourceRules:
+        - apiGroups:
+            - '*'
+          clusterScope: true
+          namespaces:
+            - '*'
+          resources:
+            - '*'
+          verbs:
+            - '*'
+      subjects:
+        - kind: ServiceAccount
+          serviceAccount:
+            name: karpenter
+            namespace: {{ .Values.namespace }}

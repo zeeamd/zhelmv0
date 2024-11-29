@@ -19,3 +19,6 @@ https://iximiuz.com/en/posts/containerd-command-line-clients/
 --sample helm charts repo
 
 --https://artifacthub.io/
+
+# karpenter is helm to deploy karpenter node scaler to aws eks
+helm install karpenter . -n karpenter --set clusterName="ABC",role="QWE"

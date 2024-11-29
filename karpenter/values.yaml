@@ -1,0 +1,26 @@
+#namespace: "karpenter"
+namespace: ""
+
+karpenterVersion: "1.0.8"
+
+karpenterControllerImage: "public.ecr.aws/karpenter/controller:1.0.8@sha256:9ea26ba59f3b104bf7df24bb0ae6eeaec94938d86c47bca81028dff1c777b654"
+
+eksKarpenterControllerRoleArn: "arn:aws:iam::00000000000:role/KarpenterControllerRole-eks-k"
+
+amiId: "ami-03e30000000000"
+
+logLevel: "info"
+
+clusterName: "eks-k"
+
+eksNodeGroupName: "eks-k-ng"
+
+replicaCount: 2
+
+resources:
+ limits:
+  cpu: 2
+  memory: 2Gi
+ requests:
+  cpu: 1
+  memory: 1Gi
